@@ -6,7 +6,7 @@ namespace AppShop.Server.GraphQL.Type
     {
         protected override void Configure(IObjectTypeDescriptor<ProductDto> descriptor)
         {
-            descriptor.Field(p => p.ProductId).Type<IdType>();
+            descriptor.Field(p => p.ProductId).Type<IntType>();
             descriptor.Field(p => p.ProductName).Type<StringType>();
             descriptor.Field(p => p.ProductCode).Type<StringType>();
             descriptor.Field(p => p.Description).Type<StringType>();

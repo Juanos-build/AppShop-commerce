@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     products: [],
-    totalPages: 0,
+    pageSize: 0,
     totalProducts: 0,
     currentPage: 1,
     isLoading: false,
@@ -17,11 +17,11 @@ const productSlice = createSlice({
             state.currentPage = action.payload;
         },
         setProducts: (state, action) => {
-            const { products, currentPage, totalProducts, totalPages } = action.payload;
+            const { products, currentPage, totalProducts, pageSize } = action.payload;
             state.products = products;
             state.currentPage = currentPage;
             state.totalProducts = totalProducts;
-            state.totalPages = Math.ceil(totalProducts / totalPages);
+            state.pageSize = Math.ceil(totalProducts / pageSize);
             state.isLoading = true;
         },
         updateStock: (state, action) => {

@@ -15,7 +15,7 @@ namespace AppShop.Server.Controllers
         [HttpPost("AddOrder")]
         [ProducesResponseType(typeof(ResponseProblem), (int)HttpStatusCode.BadRequest)]
         [Produces(typeof(Response<bool>))]
-        public async Task<IActionResult> GetProducts([FromBody] OrderDto request)
+        public async Task<IActionResult> AddOrder([FromBody] OrderDto request)
         {
             var result = await _orderService.AddOrder(request);
             return result.IsSuccess ? Ok(result) : BadRequest(new ResponseProblem().Bad(result));

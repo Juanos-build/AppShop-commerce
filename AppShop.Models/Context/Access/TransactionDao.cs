@@ -36,7 +36,7 @@ namespace AppShop.Models.Context.Access
         }
         #endregion
 
-        DataContext _dataContext;
+        private readonly DataContext _dataContext = AccessDao.DataBaseContext;
         IDbContextTransaction _dataTransaction;
 
         private readonly IProductDao _prod;
@@ -45,7 +45,7 @@ namespace AppShop.Models.Context.Access
         private readonly DaoFactory _factory;
         public TransactionDao()
         {
-            _factory = DaoFactory.GetDaoFatory(AccessDao.ConnectionString);
+            _factory = DaoFactory.GetDaoFatory(_dataContext);
             _prod = _factory.GetProductDao();
             _ord = _factory.GetOrderDao();
         }
@@ -54,7 +54,7 @@ namespace AppShop.Models.Context.Access
         {
             try
             {
-                using (_dataContext = new DataContext(AccessDao.OptionsBuilder))
+                using (_dataContext)
                 {
                     using (_dataTransaction = _dataContext.Database.BeginTransaction())
                     {
@@ -84,7 +84,7 @@ namespace AppShop.Models.Context.Access
         {
             try
             {
-                using (_dataContext = new DataContext(AccessDao.OptionsBuilder))
+                using (_dataContext)
                 {
                     using (_dataTransaction = _dataContext.Database.BeginTransaction())
                     {
@@ -114,7 +114,7 @@ namespace AppShop.Models.Context.Access
         {
             try
             {
-                using (_dataContext = new DataContext(AccessDao.OptionsBuilder))
+                using (_dataContext)
                 {
                     using (_dataTransaction = _dataContext.Database.BeginTransaction())
                     {

@@ -19,6 +19,9 @@ function ProductList() {
             if (response.isOk) {
                 dispatch(setProducts(response.result.products.result));
             }
+            else {
+                console.log(response.message);
+            }
         }
 
         getProducts();

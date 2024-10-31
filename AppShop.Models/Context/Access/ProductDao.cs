@@ -49,7 +49,7 @@ namespace AppShop.Models.Context.Access
                     Products = products,
                     TotalProducts = totalProducts,
                     CurrentPage = pageNumber,
-                    TotalPages = pageSize
+                    PageSize = pageSize
                 };
 
                 return result;

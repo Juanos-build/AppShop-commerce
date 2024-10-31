@@ -1,8 +1,8 @@
 ﻿using AppShop.Models.Context;
 using AppShop.Models.Context.Interfaces;
+using AppShop.Models.Context.Model;
 using AppShop.Models.Entities;
 using AppShop.Services.Helpers.Extension;
-using AppShop.Services.Helpers.Settings;
 using AppShop.Services.Interfaces;
 
 namespace AppShop.Services.Services
@@ -38,12 +38,13 @@ namespace AppShop.Services.Services
 
         #endregion
 
-        private readonly AppSettings _AppSettings = AppSettings.Settings;
         private readonly DaoFactory _factory;
         private readonly ITransactionDao _objTransaction;
-        public ProductService()
+        private readonly DataContext _dataContext;
+        public ProductService(DataContext dataContext)
         {
-            _factory = DaoFactory.GetDaoFatory(_AppSettings.Connection);
+            _dataContext = dataContext;
+            _factory = DaoFactory.GetDaoFatory(_dataContext);
             _objTransaction = _factory.GetTransactionDao();
         }
 

@@ -1,14 +1,19 @@
-﻿using AppShop.Models.Entities;
+﻿using AppShop.Models.Context.Model;
+using AppShop.Models.Entities;
+using AppShop.Server.GraphQL.Mutation;
 using AppShop.Server.GraphQL.Query;
 using AppShop.Server.GraphQL.Type;
+using AppShop.Services.Helpers.Extension;
+using AppShop.Services.Helpers.Settings;
 using AppShop.Services.Interfaces;
 using AppShop.Services.Services;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace AppShop.Services.Helpers.Extension
+namespace AppShop.Server.Extension
 {
     public static class ExtensionServices
     {
@@ -50,6 +55,13 @@ namespace AppShop.Services.Helpers.Extension
                     .AllowCredentials();
             }));
 
+            //Database Context
+            services.AddDbContextPool<DataContext>(options =>
+            {
+                options.UseSqlServer(AppSettings.Settings.Connection);
+                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            });
+
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IOrderService, OrderService>();
 
@@ -59,9 +71,11 @@ namespace AppShop.Services.Helpers.Extension
 
             services.AddGraphQLServer()
                 .AddQueryType<ProductQueries>()
+                .AddMutationType<OrderMutation>()
                 .AddType<ProductType>()
                 .AddFiltering()
-                .AddProjections();
+                .AddProjections()
+                .AddSorting();
 
             return services;
         }

@@ -1,13 +1,11 @@
-export const RequestHttp = async (urlSegment: string, query: boolean, request = null) => {
+export const RequestHttp = async (urlSegment: string, query: string, variables = null) => {
 
     const response = await fetch(urlSegment, {        
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(
-          query ? { query: request } : request
-        )
+        body: JSON.stringify({ query: query, variables: { request: variables } })
     })
     if (response.ok) {
         try {

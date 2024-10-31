@@ -3,10 +3,10 @@ import { useAppSelector, useAppDispatch } from '../../../app/hooks';
 
 function Pagination() {
     const dispatch = useAppDispatch();
-    const { currentPage, totalPages } = useAppSelector(state => state.productItems);
+    const { currentPage, pageSize } = useAppSelector(state => state.productItems);
 
     const numPages = [];
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = 1; i <= pageSize; i++) {
         numPages.push(i);
     }
 
@@ -41,7 +41,7 @@ function Pagination() {
                         </li>
                     ))
                 }
-                <li className={`page-item ${currentPage >= totalPages ? 'disabled' : ''}`}>
+                <li className={`page-item ${currentPage >= pageSize ? 'disabled' : ''}`}>
                     <button
                         className="page-link"
                         onClick={() => handleNextPage()}

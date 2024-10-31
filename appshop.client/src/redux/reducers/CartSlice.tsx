@@ -12,7 +12,7 @@ const cartSlice = createSlice({
         addProductToCart: (state, action) => {
             const { items } = state;
             const product = action.payload;
-            const subTotal = (product.quantity * product.price).toFixed(2);
+            const subTotal = product.quantity * product.price;
             const productToUpdate = items.find(i => i.productId === product.productId);
             if (productToUpdate) {
                 productToUpdate.quantity = product.quantity;

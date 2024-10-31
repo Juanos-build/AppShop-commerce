@@ -98,7 +98,7 @@ function Cart() {
             else {
                 Swal.fire({
                     title: "Something was wrong",
-                    text: `it has occurred an error processing the order. Error:${response.result}`,
+                    text: `it has occurred an error processing the order. Error:${response.message}`,
                     icon: "error"
                 });
                 console.log(response.result);

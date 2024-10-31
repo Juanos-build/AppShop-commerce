@@ -8,7 +8,7 @@ export const requestProducts = async (pageNumber: number, pageSize: number) => {
         const query = `{
             products(pageNumber:${pageNumber},pageSize:${pageSize}){
               result{
-                totalPages,
+                pageSize,
                 currentPage,
                 totalProducts
                 products{
@@ -22,8 +22,8 @@ export const requestProducts = async (pageNumber: number, pageSize: number) => {
                 }
               }
             }
-          }`;
-        const response = await RequestHttp(urlBase, true, query);
+        }`;
+        const response = await RequestHttp(urlBase, query);
         return response;
     }
     catch (error) {
@@ -35,13 +35,13 @@ export const requestProducts = async (pageNumber: number, pageSize: number) => {
 export const requestProductById = async (id: number) => {
     try {
         const query = `{
-          productById(id:${id}) {
+            productById(id:${id}) {
              result{
               stock
              }
           }
         }`;
-        const response = await RequestHttp(urlBase, true, query);
+        const response = await RequestHttp(urlBase, query);
         return response;
     }
     catch (error) {

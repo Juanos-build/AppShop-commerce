@@ -1,12 +1,13 @@
 ﻿using AppShop.Models.Context.Interfaces;
+using AppShop.Models.Context.Model;
 
 namespace AppShop.Models.Context
 {
     public abstract class DaoFactory
     {
-        public static DaoFactory GetDaoFatory(string connection)
+        public static DaoFactory GetDaoFatory(DataContext dataContext)
         {
-            AccessDao.ConnectionString = connection;
+            AccessDao.DataBaseContext = dataContext;
             return new AccessDao();
         }
 

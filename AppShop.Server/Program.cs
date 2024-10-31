@@ -1,4 +1,4 @@
-using AppShop.Services.Helpers.Extension;
+using AppShop.Server.Extension;
 using AppShop.Services.Helpers.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
